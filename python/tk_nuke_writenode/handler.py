@@ -1278,6 +1278,7 @@ class TankWriteNodeHandler(object):
             output_name = "%s%d" % (output_default, postfix)
             postfix += 1
 
+
         # finally, set the output name on the knob:
         node.knob(TankWriteNodeHandler.OUTPUT_KNOB_NAME).setValue(output_name)
 
