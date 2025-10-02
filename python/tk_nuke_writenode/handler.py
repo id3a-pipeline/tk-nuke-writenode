@@ -2131,6 +2131,28 @@ class TankWriteNodeHandler(object):
 
         elif knob.name() == "cds_output_tag":
             tag_value = knob.value()
+            default_dwaa_compression = 200
+            # _promoted_0 = compression knob
+            # _promoted_1 = dw_compression_level knob
+            if tag_value == "REVIEW":
+                node['_promoted_0'].setValue('DWAA')
+                node['_promoted_1'].setValue(default_dwaa_compression)
+            elif tag_value == "DIAGNOSTIC":
+                node['_promoted_0'].setValue('DWAA')
+                node['_promoted_1'].setValue(default_dwaa_compression)
+            elif tag_value == "LAYERPACK":
+                node['_promoted_0'].setValue('Zip (1 scanline)')
+                node['_promoted_1'].setEnabled(False)
+            elif tag_value == "DMP":
+                node['_promoted_0'].setValue('Zip (1 scanline)')
+                node['_promoted_1'].setEnabled(False)
+            elif tag_value == "STMAP":
+                node['_promoted_0'].setValue('Zip (1 scanline)')
+                node['_promoted_1'].setEnabled(False)
+            else:
+                node['_promoted_0'].setValue('Zip (1 scanline)')
+                node['_promoted_1'].setEnabled(False)
+
             if tag_value != "PRECOMP":
                 self.__set_output(node, 'main')
                 #self.reset_render_path(node)
