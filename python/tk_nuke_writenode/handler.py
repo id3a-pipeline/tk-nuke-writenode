@@ -2131,6 +2131,7 @@ class TankWriteNodeHandler(object):
 
         elif knob.name() == "cds_output_tag":
             tag_value = knob.value()
+
             default_dwaa_compression = 200
             # _promoted_0 = compression knob
             # _promoted_1 = dw_compression_level knob
