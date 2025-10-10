@@ -55,7 +55,7 @@ Gizmo {
  addUserKnob {
     4 cds_output_tag
     l "Output Tag"
-    M {REVIEW DIAGNOSTIC LAYERPACK PRECOMP DMP STMAP ""}
+    M {REVIEW DIAGNOSTIC LAYERPACK PRECOMP DMP STMAP DELIVERY}
     +STARTLINE
 }
  addUserKnob {
