@@ -2140,11 +2140,9 @@ class TankWriteNodeHandler(object):
                     node['_promoted_1'].setValue(default_dwaa_compression)
                 case 'LAYERPACK' | 'DMP' | 'STMAP' | 'PRECOMP' | 'DELIVERY':
                     node['_promoted_0'].setValue('Zip (1 scanline)')
-                    #node['_promoted_1'].setEnabled(False)
                 case _:
                     # default
                     node['_promoted_0'].setValue('Zip (1 scanline)')
-                    #node['_promoted_1'].setEnabled(False)
 
             if tag_value != "PRECOMP":
                 self.__set_output(node, 'main')
