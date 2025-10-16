@@ -76,7 +76,6 @@ class TankWriteNodeHandler(object):
 
     ################################################################################################
     # Public methods
-
     def populate_profiles_from_settings(self):
         """
         Sources profile definitions from the current app settings.
@@ -2130,10 +2129,23 @@ class TankWriteNodeHandler(object):
             self.__set_profile(node, new_profile_name, reset_all_settings=True)
 
         elif knob.name() == "cds_output_tag":
+            # _promoted_0 = compression knob
+            # _promoted_1 = dw_compression_level knob
+
             tag_value = knob.value()
+            default_dwaa_compression = 200
+            match tag_value:
+                case 'REVIEW' | 'DIAGNOSTIC':
+                    node['_promoted_0'].setValue('DWAA')
+                    node['_promoted_1'].setValue(default_dwaa_compression)
+                case 'LAYERPACK' | 'DMP' | 'STMAP' | 'PRECOMP' | 'DELIVERY':
+                    node['_promoted_0'].setValue('Zip (1 scanline)')
+                case _:
+                    # default
+                    node['_promoted_0'].setValue('Zip (1 scanline)')
+
             if tag_value != "PRECOMP":
                 self.__set_output(node, 'main')
-                #self.reset_render_path(node)
             else:
                 self.__set_output(node, 'LayerName')
 

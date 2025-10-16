@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b29f8e75-5151-48ec-85ba-f71f48dc77de" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/gizmos/WriteTank.gizmo" beforeDir="false" afterPath="$PROJECT_DIR$/gizmos/WriteTank.gizmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/info.yml" beforeDir="false" afterPath="$PROJECT_DIR$/info.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python/tk_nuke_writenode/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/tk_nuke_writenode/handler.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,7 +40,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/tk-nuke-writenode__02&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#3 on feature/tk-nuke-writenode__03&quot;,
     &quot;last_opened_file_path&quot;: &quot;H:/dev/flow_tools/tk-nuke-writenode&quot;
   }
 }</component>
