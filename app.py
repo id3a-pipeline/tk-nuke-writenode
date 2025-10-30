@@ -316,34 +316,28 @@ class NukeWriteNode(tank.platform.Application):
                 None,
             )
 
-            if not promoted_knob_write_nodes:
-                # no presets use promoted knobs so we are OK to register the menus.
+        # no presets use promoted knobs so we are OK to register the menus.
 
-                convert_to_write_nodes_action = lambda: self.convert_to_write_nodes(
-                    show_warning=True
-                )
-                convert_from_write_nodes_action = lambda: self.convert_from_write_nodes(
-                    show_warning=True
-                )
+        convert_to_write_nodes_action = lambda: self.convert_to_write_nodes(
+            show_warning=False
+        )
+        convert_from_write_nodes_action = lambda: self.convert_from_write_nodes(
+            show_warning=False
+        )
 
-                self.engine.register_command(
-                    "Convert PTR Write Nodes to Write Nodes...",
-                    convert_to_write_nodes_action,
-                    {
-                        "type": "context_menu",
-                        "icon": os.path.join(self.disk_location, "icon_256.png"),
-                    },
-                )
-                self.engine.register_command(
-                    "Convert Write Nodes back to PTR format...",
-                    convert_from_write_nodes_action,
-                    {
-                        "type": "context_menu",
-                        "icon": os.path.join(self.disk_location, "icon_256.png"),
-                    },
-                )
-            else:
-                self.log_debug(
-                    "Convert menu options were disabled as "
-                    "promoted knobs were detected in the app settings."
-                )
+        self.engine.register_command(
+            "Convert PTR Write Nodes to Write Nodes...",
+            convert_to_write_nodes_action,
+            {
+                "type": "context_menu",
+                "icon": os.path.join(self.disk_location, "icon_256.png"),
+            },
+        )
+        self.engine.register_command(
+            "Convert Write Nodes back to PTR format...",
+            convert_from_write_nodes_action,
+            {
+                "type": "context_menu",
+                "icon": os.path.join(self.disk_location, "icon_256.png"),
+            },
+        )

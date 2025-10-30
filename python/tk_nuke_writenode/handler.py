@@ -464,11 +464,6 @@ class TankWriteNodeHandler(object):
             knob.setValue(sg_wn["profile_name"].value())
             new_wn.addKnob(knob)
 
-            # cds_output_tag
-            knob = nuke.String_Knob("cds_output_tag")
-            knob.setValue(sg_wn["cds_output_tag"].value())
-            new_wn.addKnob(knob)
-
             # output
             knob = nuke.String_Knob("tk_output")
             knob.setValue(sg_wn[TankWriteNodeHandler.OUTPUT_KNOB_NAME].value())
@@ -497,6 +492,21 @@ class TankWriteNodeHandler(object):
             knob = nuke.String_Knob("tk_proxy_publish_template")
             knob.setValue(sg_wn["proxy_publish_template"].value())
             new_wn.addKnob(knob)
+
+            knob = nuke.String_Knob("cds_output_tag")
+            knob.setValue(sg_wn["cds_output_tag"].value())
+            new_wn.addKnob(knob)
+
+            knob = nuke.String_Knob("tk_compression")
+            knob.setValue(sg_wn["_promoted_0"].value())
+            new_wn.addKnob(knob)
+
+            knob = nuke.Int_Knob("tk_dw_compression_level")
+            knob.setValue(int(sg_wn["_promoted_1"].value()))
+            new_wn.addKnob(knob)
+
+            new_wn["compression"].setValue(sg_wn["_promoted_0"].value())
+            new_wn["dw_compression_level"].setValue(sg_wn["_promoted_1"].value())
 
             # delete original node:
             nuke.delete(sg_wn)
@@ -538,6 +548,9 @@ class TankWriteNodeHandler(object):
             publish_template_knob = wn.knob("tk_publish_template")
             proxy_render_template_knob = wn.knob("tk_proxy_render_template")
             proxy_publish_template_knob = wn.knob("tk_proxy_publish_template")
+            cds_output_tag_knob = wn.knob("cds_output_tag")
+            compression_knob = wn.knob("tk_compression")
+            dw_compression_level_knob = wn.knob("tk_dw_compression_level")
 
             if (
                 not profile_knob
@@ -558,6 +571,8 @@ class TankWriteNodeHandler(object):
 
             # create new Flow Production Tracking Write node:
             new_sg_wn = nuke.createNode(TankWriteNodeHandler.SG_WRITE_NODE_CLASS)
+            profile_name = profile_knob.value()
+
             new_sg_wn.setSelected(False)
 
             # copy across file & proxy knobs as well as all cached templates:
@@ -577,7 +592,6 @@ class TankWriteNodeHandler(object):
             # run all the normal logic that runs as part of switching the profile.
             # Instead we want this node to be rebuilt as close as possible to the
             # original before it was converted to a regular Nuke write node.
-            profile_name = profile_knob.value()
             new_sg_wn["profile_name"].setValue(profile_name)
             new_sg_wn["tk_profile_list"].setValue(profile_name)
             new_sg_wn[TankWriteNodeHandler.OUTPUT_KNOB_NAME].setValue(
@@ -621,13 +635,22 @@ class TankWriteNodeHandler(object):
             for knob_name in ["disable", "tile_color", "postage_stamp"]:
                 new_sg_wn[knob_name].setValue(wn[knob_name].value())
 
+            int_wn["compression"].setValue(compression_knob.value())
+            int_wn["dw_compression_level"].setValue(dw_compression_level_knob.value())
+
+            new_sg_wn["cds_output_tag"].setValue(cds_output_tag_knob.value())
+
+            # new_sg_wn["_promoted_0"].setValue(compression_knob.value())
+            # new_sg_wn["_promoted_1"].setValue(dw_compression_level_knob.value())
+
             # delete original node:
             nuke.delete(wn)
 
             # rename new node:
-            new_sg_wn.setName(node_name)
+            #new_sg_wn.setName(node_name)
             new_sg_wn.setXpos(node_pos[0])
             new_sg_wn.setYpos(node_pos[1])
+
 
     ################################################################################################
     # Public methods called from gizmo - although these are public, they should
