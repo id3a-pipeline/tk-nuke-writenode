@@ -341,3 +341,4 @@ class NukeWriteNode(tank.platform.Application):
                 "icon": os.path.join(self.disk_location, "icon_256.png"),
             },
         )
+
