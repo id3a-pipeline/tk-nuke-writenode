@@ -497,6 +497,10 @@ class TankWriteNodeHandler(object):
             knob.setValue(sg_wn["cds_output_tag"].value())
             new_wn.addKnob(knob)
 
+            knob = nuke.String_Knob("cds_output")
+            knob.setValue(sg_wn["tank_channel"].value())
+            new_wn.addKnob(knob)
+
             knob = nuke.String_Knob("tk_compression")
             knob.setValue(sg_wn["_promoted_0"].value())
             new_wn.addKnob(knob)
@@ -540,7 +544,7 @@ class TankWriteNodeHandler(object):
         for wn in write_nodes:
             # look for additional toolkit knobs:
             profile_knob = wn.knob("tk_profile_name")
-            output_knob = wn.knob("tk_output")
+            output_knob = wn.knob("cds_output")
             use_name_as_output_knob = wn.knob(
                 TankWriteNodeHandler.USE_NAME_AS_OUTPUT_KNOB_NAME
             )
@@ -549,6 +553,7 @@ class TankWriteNodeHandler(object):
             proxy_render_template_knob = wn.knob("tk_proxy_render_template")
             proxy_publish_template_knob = wn.knob("tk_proxy_publish_template")
             cds_output_tag_knob = wn.knob("cds_output_tag")
+            cds_output_knob = wn.knob("cds_output")
             compression_knob = wn.knob("tk_compression")
             dw_compression_level_knob = wn.knob("tk_dw_compression_level")
 
@@ -639,6 +644,7 @@ class TankWriteNodeHandler(object):
             int_wn["dw_compression_level"].setValue(dw_compression_level_knob.value())
 
             new_sg_wn["cds_output_tag"].setValue(cds_output_tag_knob.value())
+            new_sg_wn["tank_channel"].setValue(cds_output_knob.value())
 
             # new_sg_wn["_promoted_0"].setValue(compression_knob.value())
             # new_sg_wn["_promoted_1"].setValue(dw_compression_level_knob.value())
